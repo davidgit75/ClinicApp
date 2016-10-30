@@ -6,4 +6,10 @@
     <string name="register.identification">Identificación</string>
     <string name="register.email">Correo electrónico</string>
     <string name="register.password">Contraseña</string>
+
+    <!-- Login Strings -->
+    <string name="login.username">Usuario</string>
+    <string name="login.pass">Contraseña</string>
+    <string name="login.enter">Ingresar</string>
 </resources>
+
