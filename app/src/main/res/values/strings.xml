@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <resources>
     <string name="app_name">ClinicApp</string>
 
@@ -7,3 +8,16 @@
     <string name="register.email">Correo electrónico</string>
     <string name="register.password">Contraseña</string>
 </resources>
+=======
+<resources>
+    <string name="app_name">ClinicApp</string>
+
+
+    <!-- Login Strings -->
+    <string name="login.username">Cédula del usuario</string>
+    <string name="login.pass">Contraseña</string>
+    <string name="login.enter">Ingresar</string>
+    <string name="login_error_idUser">No ha ingresado su cedula</string>
+    <string name="login_error_pass">No ha ingresado su contraseña</string>
+</resources>
+>>>>>>> 4958b97f9c92f84bc6360a6bfe957c001f9e4d39

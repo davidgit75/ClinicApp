@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 apply plugin: 'com.android.application'
 
 android {
@@ -29,3 +30,32 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
 
 }
+=======
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        applicationId "com.davidh.davidh.clinicapp"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+}
+>>>>>>> 4958b97f9c92f84bc6360a6bfe957c001f9e4d39
