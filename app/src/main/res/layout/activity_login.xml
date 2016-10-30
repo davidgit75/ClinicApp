@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/et_login_userName"
-            android:hint="@string/et.login.user.name"
+            android:hint="@string/login.username"
             android:inputType="text"
             android:textColor="@color/textApp"/>
     </android.support.design.widget.TextInputLayout>
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/et_login_pass"
-            android:hint="@string/et.login.pass"
+            android:hint="@string/login.pass"
             android:inputType="textPassword"
             android:textColor="@color/textApp"/>
     </android.support.design.widget.TextInputLayout>
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/btn.login"
+        android:text="@string/login.enter"
         android:textStyle="bold"
         android:textSize="30sp"
         android:textAllCaps="false"
