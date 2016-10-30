@@ -3,7 +3,9 @@
 
 
     <!-- Login Strings -->
-    <string name="login.username">Usuario</string>
+    <string name="login.username">Cédula del usuario</string>
     <string name="login.pass">Contraseña</string>
     <string name="login.enter">Ingresar</string>
+    <string name="login_error_idUser">No ha ingresado su cedula</string>
+    <string name="login_error_pass">No ha ingresado su contraseña</string>
 </resources>

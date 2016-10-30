@@ -35,9 +35,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/et_login_userName"
+            android:id="@+id/et_login_idUser"
             android:hint="@string/login.username"
-            android:inputType="text"
+            android:inputType="number"
             android:textColor="@color/textApp"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -60,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/login.enter"
+        android:id="@+id/btn_login_deposit"
         android:textStyle="bold"
         android:textSize="30sp"
         android:textAllCaps="false"
