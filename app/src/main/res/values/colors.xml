@@ -1,28 +1,12 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#00BCD4</color>
     <color name="colorPrimaryDark">#0097A7</color>
     <color name="colorAccent">#FFF</color>
-
+    
     <!-- Custom colors -->
     <color name="mainApp">#00BCD4</color>
     <color name="textApp">#FFF</color>
     <color name="linkApp">#FFF</color>
     <color name="btnApp">#0097A7</color>
 </resources>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FFF</color>
-
-
-    <!-- Custom colors -->
-    <color name="mainApp">#00BCD4</color>
-    <color name="textApp">#FFF</color>
-    <color name="linkApp">#FFF</color>
-    <color name="btnApp">#0097A7</color>
-</resources>
->>>>>>> 4958b97f9c92f84bc6360a6bfe957c001f9e4d39
