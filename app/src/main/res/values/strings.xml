@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ClinicApp</string>
+
+    <!-- Register Strings -->
+    <string name="register.names">Nombres y apellidos</string>
+    <string name="register.identification">Identificación</string>
+    <string name="register.email">Correo electrónico</string>
+    <string name="register.password">Contraseña</string>
 </resources>
