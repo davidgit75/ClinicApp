@@ -2,10 +2,12 @@
     <string name="app_name">ClinicApp</string>
 
     <!-- Register Strings -->
-    <string name="register.names">Nombres y apellidos</string>
+    <string name="register.names">Nombres</string>
+    <string name="register.lastnames">Apellidos</string>
     <string name="register.identification">Identificación</string>
     <string name="register.email">Correo electrónico</string>
     <string name="register.password">Contraseña</string>
+    <string name="register.password_repeat">Repetir Contraseña</string>
     
     <!-- Login Strings -->
     <string name="login.username">Cédula del usuario</string>

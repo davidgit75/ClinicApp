@@ -38,7 +38,9 @@
             android:id="@+id/et_login_idUser"
             android:hint="@string/login.username"
             android:inputType="number"
-            android:textColor="@color/textApp"/>
+            android:textColor="@color/textApp"
+            android:textColorHint="@color/linkApp"
+            />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -53,8 +55,11 @@
             android:id="@+id/et_login_pass"
             android:hint="@string/login.pass"
             android:inputType="textPassword"
-            android:textColor="@color/textApp"/>
+            android:textColor="@color/textApp"
+            android:textColorHint="@color/linkApp"/>
     </android.support.design.widget.TextInputLayout>
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +67,7 @@
         android:text="@string/login.enter"
         android:id="@+id/btn_login_deposit"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textAllCaps="false"
         android:layout_gravity="center"
         android:layout_marginRight="10dp"
@@ -70,5 +75,16 @@
         android:background="@color/btnApp"
         android:textColor="@color/textApp"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linkLoginToRegister"
+        android:text="Registrarse"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="200dp"
+        android:textColor="@color/linkApp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

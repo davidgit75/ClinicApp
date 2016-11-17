@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
@@ -15,28 +16,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomRequest {
+    JsonObjectRequest jsonRequest;
     private RequestQueue req;
-    private JsonObjectRequest jsonRequest;
-    private JSONObject CurrentReponse;
+    public static JSONObject currentResponse;
 
-    public JSONObject checkUserInMedicalCenter(String[] keys, String[] values){
-        return startRequest(keys, values, ConfigUrl.checkUserInMedicalCenter);
+    private void setCurrentResponse(JSONObject newResponse){
+        currentResponse = newResponse;
     }
 
 
-    private JSONObject startRequest(String[] keys, String[] values, String url){
-        this.jsonRequest = new JsonObjectRequest(
-                Request.Method.POST,
+    private void makeRequest(Map<String, String> body, String url, int method){
+        req.start();
+        jsonRequest = new JsonObjectRequest(
+                method,
                 url,
-                setBodyRequest(keys, values),
+                new JSONObject(body),
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response){
                         try{
-                            CurrentReponse = response;
+                            Log.d("AFTERTREQUEST", response.toString());
+                            setCurrentResponse(response);
                             req.stop();
-                        }catch(Exception e){
-                            //Log.d("onError", error.getMessage());
+                        }catch(Exception error){
+                            Log.d("onError", error.getMessage());
                         }
                     }
                 },
@@ -49,17 +52,7 @@ public class CustomRequest {
                 }
         );
 
-        return CurrentReponse;
+        req.add(jsonRequest);
     }
 
-
-    private JSONObject setBodyRequest(String[] keys, String[] values){
-        Map<String, String> body = new HashMap<>();
-
-        for(int i=0; i<keys.length; i++){
-            body.put(keys[i], values[i]);
-        }
-
-        return new JSONObject(body);
-    }
 }
