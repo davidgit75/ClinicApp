@@ -7,4 +7,6 @@ public abstract class UrlService {
 
     public static String loginUserInApp = selectedType + "/app/user/login";
     public static String registerUserInApp = selectedType + "/app/user/new";
+
+    public static String getMedics = selectedType + "/app/medics";
 }

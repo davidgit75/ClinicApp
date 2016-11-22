@@ -61,9 +61,17 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/reisterSpinnerTypeUser"
+            android:id="@+id/registerSpinnerTypeUser"
             android:layout_marginTop="30dp">
 
+        </Spinner>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/registerSpinnerMedicReviewer"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible">
         </Spinner>
 
 
@@ -75,7 +83,7 @@
                 android:textColor="@color/textApp"
                 android:textColorHint="@color/textApp"
                 android:hint="@string/register.professionalid"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="0dp"
                 android:inputType="number"
                 android:visibility="invisible"/>
 

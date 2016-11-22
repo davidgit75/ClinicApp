@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
     EditText idUser, pass;
     TextView goToRegister;
     Button btnLogin;
-    CustomRequest cRequest;
     JsonObjectRequest jsonRequest;
     private RequestQueue req;
 
@@ -84,24 +83,27 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initSession(String id, String username){
+    private void initSession(String id, String username, String email){
         SharedPreferences sharedPreferences = getSharedPreferences("user_connected", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("id", id);
+        editor.putString("_id", id);
         editor.putString("username", username);
+        editor.putString("email", email);
         editor.commit();
     }
 
     private JSONObject getBody(){
         Map body = new HashMap();
-        body.put("id", idUser.getText().toString());
+        body.put("identification", idUser.getText().toString());
         body.put("password", pass.getText().toString());
         return new JSONObject(body);
     }
 
     private void initApp(String typeUser){
-        //finish();
-        //if()
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MenuApp.class);
+        intent.putExtra("typeUser", typeUser);
+        startActivity(intent);
     }
 
     private void checkUserIsMedical(){
@@ -120,7 +122,13 @@ public class Login extends AppCompatActivity {
 
                             pd.dismiss();
 
-                            //Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
+                            if(response.getString("status").equals("success")){
+                                JSONObject userToConnect = response.getJSONObject("data");
+                                initSession(userToConnect.getString("_id"), userToConnect.getString("names"), userToConnect.getString("email"));
+                                initApp(response.getString("typeUser"));
+                            }else{
+                                Snackbar.make(findViewById(R.id.container_login), response.getString("message"), Snackbar.LENGTH_SHORT).show();
+                            }
 
 
                             req.stop();
