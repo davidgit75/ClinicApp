@@ -8,6 +8,7 @@
     <string name="register.email">Correo electrónico</string>
     <string name="register.password">Contraseña</string>
     <string name="register.password_repeat">Repetir Contraseña</string>
+    <string name="register.professionalid">Identificación profesional</string>
     
     <!-- Login Strings -->
     <string name="login.username">Cédula del usuario</string>

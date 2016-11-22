@@ -67,6 +67,19 @@
         </Spinner>
 
 
+
+            <EditText
+                android:id="@+id/et_register_professionalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textApp"
+                android:textColorHint="@color/textApp"
+                android:hint="@string/register.professionalid"
+                android:layout_marginTop="30dp"
+                android:inputType="number"
+                android:visibility="invisible"/>
+
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_register_identification"
             android:layout_width="match_parent"

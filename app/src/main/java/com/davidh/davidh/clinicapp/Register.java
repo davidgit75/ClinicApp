@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    public EditText username, lastname, email, identification, password, passwordRepeat;
+    public EditText username, lastname, email, identification, password, passwordRepeat, professionalId;
     public Spinner typeUser;
     public TextView txvGgoToLogin;
     private Map<String, String> typeUserMap;
@@ -40,7 +40,7 @@ public class Register extends AppCompatActivity {
     String typeUserValue;
     JsonObjectRequest jsonRequest;
 
-    private RequestQueue req;
+    RequestQueue req;
 
 
     @Override
@@ -61,6 +61,7 @@ public class Register extends AppCompatActivity {
         lastname = (EditText) findViewById(R.id.et_register_lastnames);
         email = (EditText) findViewById(R.id.et_register_email);
         identification = (EditText) findViewById(R.id.et_register_identification);
+        professionalId = (EditText) findViewById(R.id.et_register_professionalid);
         password = (EditText) findViewById(R.id.et_register_password);
         passwordRepeat = (EditText) findViewById(R.id.et_register_password_repeat);
         typeUser = (Spinner) findViewById(R.id.reisterSpinnerTypeUser);
@@ -95,6 +96,12 @@ public class Register extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 typeUserValue = typeUser.getSelectedItem().toString();
+                Log.d("SSSSSS", typeUserValue);
+                if(typeUserMap.get(typeUserValue).equals("medic")){
+                    professionalId.setVisibility(View.VISIBLE);
+                }else{
+                    professionalId.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -114,10 +121,11 @@ public class Register extends AppCompatActivity {
             dataToRegister.put("identification", identification.getText().toString());
             dataToRegister.put("email", email.getText().toString());
             dataToRegister.put("password", password.getText().toString());
+            dataToRegister.put("professionalId", professionalId.getText().toString());
 
             Log.d("REGISTERING", dataToRegister.toString());
 
-            makeRequest(dataToRegister, ConfigUrl.registerUserInApp, Request.Method.POST);
+            makeRequest(dataToRegister, UrlService.registerUserInApp, Request.Method.POST);
         }else{
 
         }
@@ -164,7 +172,12 @@ public class Register extends AppCompatActivity {
         }else if(!password.getText().toString().equals(passwordRepeat.getText().toString())){
             Snackbar.make(findViewById(R.id.container_register), "Las contraseñas deben coincidir", Snackbar.LENGTH_SHORT).show();
             return false;
-        }else{
+        }
+        else if(typeUserMap.get(typeUserValue).equals("medic") && professionalId.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Debe ingresar su identificación profesional", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
             return true;
         }
     }
@@ -190,7 +203,7 @@ public class Register extends AppCompatActivity {
                             /*if(response.get("status").equals("success") && response.getBoolean("existUser")){
                                 Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
                             }else*/
-                            if(response.get("status").equals("success") && response.getBoolean("userRegistered")){
+                            if(response.get("status").equals("success")){
                                 goToLogin();
                             }
 

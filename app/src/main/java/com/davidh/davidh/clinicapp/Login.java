@@ -1,6 +1,10 @@
 package com.davidh.davidh.clinicapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,18 +13,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Login extends AppCompatActivity {
     EditText idUser, pass;
     TextView goToRegister;
-    Button deposit;
+    Button btnLogin;
     CustomRequest cRequest;
-    RequestQueue req;
+    JsonObjectRequest jsonRequest;
+    private RequestQueue req;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +40,7 @@ public class Login extends AppCompatActivity {
 
         idUser = (EditText)findViewById(R.id.et_login_idUser);
         pass = (EditText)findViewById(R.id.et_login_pass);
-        deposit = (Button)findViewById(R.id.btn_login_deposit);
+        btnLogin = (Button)findViewById(R.id.btn_login_deposit);
         goToRegister = (TextView) findViewById(R.id.linkLoginToRegister);
 
 
@@ -47,29 +58,23 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        deposit.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               checkUserInMedicalCenter();
+                loginUser();
             }
         });
 
     }
 
-    public void checkUserInMedicalCenter(){
+    public void loginUser(){
         if (idUser.getText().toString().length() <= 0){
             idUser.setError(getString(R.string.login_error_idUser));
         }else if (pass.getText().toString().length() <= 0) {
             pass.setError(getString(R.string.login_error_pass));
         }
         else {
-
-            //hacer cualquier cosa
-            String [] keys = {"claves"};
-            String [] values = {"valores"};
-            //cRequest.checkUserInMedicalCenter(keys, values);
-
-            //Log.d("XXX", res.toString());
+            checkUserIsMedical();
         }
     }
 
@@ -77,5 +82,62 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Register.class);
         finish();
         startActivity(intent);
+    }
+
+    private void initSession(String id, String username){
+        SharedPreferences sharedPreferences = getSharedPreferences("user_connected", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("id", id);
+        editor.putString("username", username);
+        editor.commit();
+    }
+
+    private JSONObject getBody(){
+        Map body = new HashMap();
+        body.put("id", idUser.getText().toString());
+        body.put("password", pass.getText().toString());
+        return new JSONObject(body);
+    }
+
+    private void initApp(String typeUser){
+        //finish();
+        //if()
+    }
+
+    private void checkUserIsMedical(){
+        final ProgressDialog pd = ProgressDialog.show(this, "Verificando credenciales del usuario", "Esperando respuesta");
+
+        req.start();
+        jsonRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                UrlService.loginUserInApp,
+                getBody(),
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response){
+                        try{
+                            Log.d("AFTERLOGIN", response.toString());
+
+                            pd.dismiss();
+
+                            //Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
+
+
+                            req.stop();
+                        }catch(Exception error){
+                            Log.d("onError", error.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("onError", error.getMessage());
+                        req.stop();
+                    }
+                }
+        );
+
+        req.add(jsonRequest);
     }
 }

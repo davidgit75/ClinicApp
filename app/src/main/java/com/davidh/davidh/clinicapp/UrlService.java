@@ -1,7 +1,7 @@
 package com.davidh.davidh.clinicapp;
 
-public abstract class ConfigUrl {
-    private static String development = "http://192.168.0.21:3000/clinicapp";
+public abstract class UrlService {
+    private static String development = "http://192.168.0.61:3000/clinicapp";
     private static String production = "";
     private static String selectedType = development;
 
