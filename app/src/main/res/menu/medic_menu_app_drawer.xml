@@ -3,11 +3,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/patientHistory"
+            android:id="@+id/medicMypatients"
             android:icon="@drawable/ic_assignment_24dp"
-            android:title="Mi historia" />
+            android:title="Mis pacientes" />
         <item
-            android:id="@+id/patientTests"
+            android:id="@+id/medicTests"
             android:icon="@drawable/ic_dns_24dp"
             android:title="Exámenes" />
     </group>
@@ -15,11 +15,11 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/patientProfile"
+                android:id="@+id/medicProfile"
                 android:icon="@drawable/ic_settings_24dp"
                 android:title="Configuración" />
             <item
-                android:id="@+id/patientBtnLogout"
+                android:id="@+id/medicBtnLogout"
                 android:icon="@drawable/ic_power_settings_new_24dp"
                 android:title="Salir" />
         </menu>

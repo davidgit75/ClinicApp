@@ -33,15 +33,14 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    public EditText username, lastname, email, identification, password, passwordRepeat, professionalId;
-    public Spinner typeUser;
-    public Spinner listMedics;
+    public EditText username, lastname, email, identification, password, passwordRepeat, professionalId, age, civilState, sex, occupation, phone;
+    public Spinner typeUser, listMedicalCenters;
     public TextView txvGgoToLogin;
     private Map<String, String> typeUserMap;
-    private Map<String, String> medicsMap;
+    private Map<String, String> centersMap;
     Button btnRegister;
     String typeUserValue;
-    int medicSelectedIndex;
+    int centerSelectedIndex;
     JsonObjectRequest jsonRequest;
 
     RequestQueue req;
@@ -69,8 +68,15 @@ public class Register extends AppCompatActivity {
         professionalId = (EditText) findViewById(R.id.et_register_professionalid);
         password = (EditText) findViewById(R.id.et_register_password);
         passwordRepeat = (EditText) findViewById(R.id.et_register_password_repeat);
+        age = (EditText) findViewById(R.id.et_register_age);
+        civilState = (EditText) findViewById(R.id.et_register_civil_state);
+        sex = (EditText) findViewById(R.id.et_register_sex);
+        occupation = (EditText) findViewById(R.id.et_register_occupation);
+        phone = (EditText) findViewById(R.id.et_register_phone);
+
+
         typeUser = (Spinner) findViewById(R.id.registerSpinnerTypeUser);
-        listMedics = (Spinner) findViewById(R.id.registerSpinnerMedicReviewer);
+        listMedicalCenters = (Spinner) findViewById(R.id.registerSpinnerMedicalCenter);
         txvGgoToLogin = (TextView) findViewById(R.id.txv_goto_login);
         btnRegister = (Button) findViewById(R.id.btn_register);
 
@@ -78,11 +84,9 @@ public class Register extends AppCompatActivity {
         typeUserMap.put("Médico", "medic");
         typeUserMap.put("Paciente", "patient");
 
-        medicsMap = new HashMap<>();
+        centersMap = new HashMap<>();
 
         req = Volley.newRequestQueue(this);
-
-        Log.d("UI", txvGgoToLogin.toString());
     }
 
     public void initActions(){
@@ -106,10 +110,10 @@ public class Register extends AppCompatActivity {
                 typeUserValue = typeUser.getSelectedItem().toString();
                 if(typeUserMap.get(typeUserValue).equals("medic")){
                     professionalId.setVisibility(View.VISIBLE);
-                    listMedics.setVisibility(View.INVISIBLE);
+                    listMedicalCenters.setVisibility(View.VISIBLE);
                 }else{
                     professionalId.setVisibility(View.INVISIBLE);
-                    listMedics.setVisibility(View.VISIBLE);
+                    listMedicalCenters.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -119,11 +123,10 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        listMedics.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listMedicalCenters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                medicSelectedIndex = i;
-                Log.d("INDEXXXX", Integer.toString(medicSelectedIndex));
+                centerSelectedIndex = i;
             }
 
             @Override
@@ -143,11 +146,15 @@ public class Register extends AppCompatActivity {
             dataToRegister.put("identification", identification.getText().toString());
             dataToRegister.put("email", email.getText().toString());
             dataToRegister.put("password", password.getText().toString());
+            dataToRegister.put("age", age.getText().toString());
+            dataToRegister.put("civil_state", civilState.getText().toString());
+            dataToRegister.put("sex", sex.getText().toString());
+            dataToRegister.put("occupation", occupation.getText().toString());
+            dataToRegister.put("phone", phone.getText().toString());
             dataToRegister.put("professionalId", professionalId.getText().toString());
-            dataToRegister.put("reviewer", medicsMap.get(Integer.toString(medicSelectedIndex-1)));
+            dataToRegister.put("center", centersMap.get(Integer.toString(centerSelectedIndex-1)));
 
             Log.d("REGISTERING", dataToRegister.toString());
-            Log.d("MEDICSMAP", medicsMap.toString());
 
             makeRequest(dataToRegister, UrlService.registerUserInApp, Request.Method.POST);
         }else{
@@ -181,19 +188,24 @@ public class Register extends AppCompatActivity {
                             Log.d("GETMEDICS", response.toString());
 
                             if(response.getString("status").equals("success")){
-                                List <String> localListMedics = new ArrayList<String>();
-                                JSONArray medics = response.getJSONArray("data");
-                                localListMedics.add("Elija su médico de cabecera");
+                                List <String> localListCenters = new ArrayList<String>();
 
-                                for(int i=0; i<medics.length(); i++){
-                                    localListMedics.add(medics.getJSONObject(i).getString("names"));
-                                    medicsMap.put(Integer.toString(i), medics.getJSONObject(i).getString("_id"));
+                                JSONArray centers = response.getJSONObject("data").getJSONArray("centers");
+
+                                if(centers.length()<=0){
+                                    localListCenters.add("No hay centros médicos registrados");
+                                    Snackbar.make(findViewById(R.id.container_register), "No hay centros médicos registrados", Snackbar.LENGTH_SHORT).show();
+                                }else{
+                                    localListCenters.add("Elija el centro médico al que pertenece");
+                                    for(int i=0; i<centers.length(); i++){
+                                        localListCenters.add(centers.getJSONObject(i).getString("name"));
+                                        centersMap.put(Integer.toString(i), centers.getJSONObject(i).getString("_id"));
+                                    }
                                 }
 
-
-                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(Register.this,R.layout.support_simple_spinner_dropdown_item, localListMedics);
-                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                listMedics.setAdapter(dataAdapter);
+                                ArrayAdapter<String> dataCentersAdapter = new ArrayAdapter<>(Register.this,R.layout.support_simple_spinner_dropdown_item, localListCenters);
+                                dataCentersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                listMedicalCenters.setAdapter(dataCentersAdapter);
                             }else{
                                 Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
                             }
@@ -207,7 +219,7 @@ public class Register extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("onError", error.getMessage());
+                        Log.d("onError", error.toString());
                         req.stop();
                     }
                 }
@@ -245,11 +257,26 @@ public class Register extends AppCompatActivity {
         }else if(!password.getText().toString().equals(passwordRepeat.getText().toString())){
             Snackbar.make(findViewById(R.id.container_register), "Las contraseñas deben coincidir", Snackbar.LENGTH_SHORT).show();
             return false;
+        }else if(age.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Ingrese su edad", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }else if(civilState.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Ingrese su estado civil", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }else if(sex.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Ingrese su sexo", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }else if(occupation.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Ingrese su ocupación", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }else if(phone.getText().toString().equals("")){
+            Snackbar.make(findViewById(R.id.container_register), "Ingrese su número telefónico", Snackbar.LENGTH_SHORT).show();
+            return false;
         }else if(typeUserMap.get(typeUserValue).equals("medic") && professionalId.getText().toString().equals("")){
             Snackbar.make(findViewById(R.id.container_register), "Debe ingresar su identificación profesional", Snackbar.LENGTH_SHORT).show();
             return false;
-        }else if(typeUserMap.get(typeUserValue).equals("patient") && medicSelectedIndex<=0){
-            Snackbar.make(findViewById(R.id.container_register), "Debe ingresar su médico de cabecera", Snackbar.LENGTH_SHORT).show();
+        }else if(typeUserMap.get(typeUserValue).equals("medic") && centerSelectedIndex<=0){
+            Snackbar.make(findViewById(R.id.container_register), "Debe ingresar el centro médico al que pertenece", Snackbar.LENGTH_SHORT).show();
             return false;
         }
         else{
@@ -273,13 +300,10 @@ public class Register extends AppCompatActivity {
 
                             pd.dismiss();
 
-                            Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
-
-                            /*if(response.get("status").equals("success") && response.getBoolean("existUser")){
-                                Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
-                            }else*/
                             if(response.get("status").equals("success")){
                                 goToLogin();
+                            }else{
+                                Snackbar.make(findViewById(R.id.container_register), response.getString("message"), Snackbar.LENGTH_SHORT).show();
                             }
 
                             req.stop();

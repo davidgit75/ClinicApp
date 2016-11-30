@@ -83,13 +83,15 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initSession(String id, String username, String email){
+    private void initSession(String id, String username, String email, String role){
         SharedPreferences sharedPreferences = getSharedPreferences("user_connected", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("_id", id);
         editor.putString("username", username);
         editor.putString("email", email);
+        editor.putString("role", role);
         editor.commit();
+        Log.d("INITSESSION", editor.toString());
     }
 
     private JSONObject getBody(){
@@ -100,9 +102,10 @@ public class Login extends AppCompatActivity {
     }
 
     private void initApp(String typeUser){
-        finish();
+        Log.d("INITAPP", typeUser);
         Intent intent = new Intent(getApplicationContext(), MenuApp.class);
-        intent.putExtra("typeUser", typeUser);
+        //intent.putExtra("typeUser", typeUser);
+        finish();
         startActivity(intent);
     }
 
@@ -124,7 +127,7 @@ public class Login extends AppCompatActivity {
 
                             if(response.getString("status").equals("success")){
                                 JSONObject userToConnect = response.getJSONObject("data");
-                                initSession(userToConnect.getString("_id"), userToConnect.getString("names"), userToConnect.getString("email"));
+                                initSession(userToConnect.getString("_id"), userToConnect.getString("names"), userToConnect.getString("email"), response.getString("typeUser"));
                                 initApp(response.getString("typeUser"));
                             }else{
                                 Snackbar.make(findViewById(R.id.container_login), response.getString("message"), Snackbar.LENGTH_SHORT).show();
