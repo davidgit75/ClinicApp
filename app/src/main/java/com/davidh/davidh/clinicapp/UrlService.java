@@ -9,4 +9,8 @@ public abstract class UrlService {
     public static String registerUserInApp = selectedType + "/app/user/new";
 
     public static String getMedics = selectedType + "/app/medics";
+
+    public static String checkExistPatient = selectedType + "/app/user/check";
+    public static String sendNewHistory = selectedType + "/app/history/new";
+    public static String getHistoryByPatient = selectedType + "/app/history/";
 }

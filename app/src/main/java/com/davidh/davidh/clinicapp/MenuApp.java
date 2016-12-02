@@ -42,11 +42,14 @@ public class MenuApp extends AppCompatActivity
     PatientProfile patientProfile;
     MedicPatients medicPatients;
     MediTests medicTests;
+    newClicinalHistory newHistory;
     MedicProfile medicProfile;
     int containerPatient, containerMedic;
 
     FragmentManager fragment;
     FragmentTransaction transaction;
+
+    //FloatingActionButton fabActionsMedic;
 
 
     @Override
@@ -60,15 +63,6 @@ public class MenuApp extends AppCompatActivity
         setContentView(appLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(appDrawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,6 +83,7 @@ public class MenuApp extends AppCompatActivity
         patientProfile = new PatientProfile();
         medicPatients = new MedicPatients();
         medicTests = new MediTests();
+        newHistory = new newClicinalHistory();
         medicProfile = new MedicProfile();
 
         containerPatient = R.id.containerPatient;
@@ -141,7 +136,7 @@ public class MenuApp extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_app, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -202,6 +197,9 @@ public class MenuApp extends AppCompatActivity
                 break;
             case R.id.medicTests:
                 showFragment(containerMedic, medicTests);
+                break;
+            case R.id.medicNewHistory:
+                showFragment(containerMedic, newHistory);
                 break;
             case R.id.medicProfile:
                 showFragment(containerMedic, medicProfile);

@@ -36,7 +36,6 @@ public class CustomRequest {
                     public void onResponse(JSONObject response){
                         try{
                             Log.d("AFTERTREQUEST", response.toString());
-                            setCurrentResponse(response);
                             req.stop();
                         }catch(Exception error){
                             Log.d("onError", error.getMessage());
