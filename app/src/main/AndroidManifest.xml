@@ -21,7 +21,16 @@
         <activity
             android:name=".MenuApp"
             android:label="@string/title_activity_menu_app"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HistoryDetails"
+            android:label="@string/title_activity_history_details"
+            android:parentActivityName=".MenuApp"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidh.davidh.clinicapp.MenuApp" />
+        </activity>
     </application>
 
 </manifest>

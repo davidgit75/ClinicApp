@@ -231,6 +231,13 @@
             android:maxHeight="100dp"
             />
 
+        <Spinner
+            android:id="@+id/nhMedicalCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
         <Button
             android:id="@+id/nhSend"
             android:layout_width="match_parent"

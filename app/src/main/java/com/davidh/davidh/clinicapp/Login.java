@@ -90,6 +90,7 @@ public class Login extends AppCompatActivity {
         editor.putString("username", username);
         editor.putString("email", email);
         editor.putString("role", role);
+        editor.putString("identification", idUser.getText().toString());
         editor.commit();
         Log.d("INITSESSION", editor.toString());
     }

@@ -9,4 +9,6 @@
     <color name="textApp">#FFF</color>
     <color name="linkApp">#FFF</color>
     <color name="btnApp">#0097A7</color>
+
+    <color name="indigo">#3f51b5</color>
 </resources>

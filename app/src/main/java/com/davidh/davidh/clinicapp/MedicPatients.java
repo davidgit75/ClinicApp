@@ -108,13 +108,12 @@ public class MedicPatients extends Fragment {
                                     histories = new ArrayList<>();
 
                                     for(int i=0; i<objHs.length(); i++){
-                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy, hh:mm:ss");
-                                        String cDate = formatter.format(new Date(objHs.getJSONObject(i).getLong("date")));
                                         histories.add(new HistoryTemplate(
                                                 objHs.getJSONObject(i).getString("reason_to_query"),
                                                 objHs.getJSONObject(i).getString("recommendations"),
                                                 objHs.getJSONObject(i).getJSONObject("medic").getString("names"),
-                                                cDate
+                                                objHs.getJSONObject(i).getString("date"),
+                                                objHs.getJSONObject(i)
                                         ));
                                     }
 

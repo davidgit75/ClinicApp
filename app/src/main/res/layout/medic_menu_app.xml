@@ -37,4 +37,6 @@
         app:headerLayout="@layout/medic_nav_header"
         app:menu="@menu/medic_menu_app_drawer" />
 
+
+
 </android.support.v4.widget.DrawerLayout>

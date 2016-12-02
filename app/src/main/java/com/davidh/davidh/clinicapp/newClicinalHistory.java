@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,9 +24,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -42,8 +48,12 @@ public class newClicinalHistory extends Fragment {
     Boolean existPatient;
     Boolean bDrunk = false, bDrugs = false, bSmoke = false;
 
+    private Map<String, String> centersMap;
+    public Spinner listMedicalCenters;
+
     JsonObjectRequest jsonRequest;
     private RequestQueue req;
+    int centerSelectedIndex;
 
 
 
@@ -136,6 +146,25 @@ public class newClicinalHistory extends Fragment {
             }
         });
 
+        listMedicalCenters = (Spinner) rootView.findViewById(R.id.nhMedicalCenter);
+
+        centersMap = new HashMap<>();
+
+        listMedicalCenters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                centerSelectedIndex = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        addItemsToSpinnerMedicReviewer();
+
+
 
         return rootView;
     }
@@ -204,6 +233,9 @@ public class newClicinalHistory extends Fragment {
         }else if(recommendations.getText().length()<=0){
             recommendations.setError("Describa si tiene recomendaciones para el paciente");
             recommendations.requestFocus();
+            return false;
+        }else if(centerSelectedIndex<=0){
+            Snackbar.make(rootView, "Debe ingresar el centro médico en el que es atendido", Snackbar.LENGTH_SHORT).show();
             return false;
         }
 
@@ -362,6 +394,7 @@ public class newClicinalHistory extends Fragment {
         dataHistory.put("tests", tests.getText().toString());
         dataHistory.put("recommendations", recommendations.getText().toString());
         dataHistory.put("medic", getActivity().getSharedPreferences("user_connected", Context.MODE_PRIVATE).getString("_id", ""));
+        dataHistory.put("medicalcenter", centersMap.get(Integer.toString(centerSelectedIndex-1)));
 
 
         body.put("identification", idUser.getText().toString());
@@ -395,6 +428,64 @@ public class newClicinalHistory extends Fragment {
         recommendations.setText("");
     }
 
+
+    private void addItemsToSpinnerMedicReviewer(){
+        req.start();
+        jsonRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                UrlService.getMedics,
+                null,
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response){
+                        try{
+                            Log.d("GETMEDICS", response.toString());
+
+                            if(response.getString("status").equals("success")){
+                                List<String> localListCenters = new ArrayList<String>();
+
+                                JSONArray centers = response.getJSONObject("data").getJSONArray("centers");
+
+                                Log.d("CENTERS", centers.toString());
+                                Log.d("CENTERSLEN", Integer.toString(centers.length()));
+
+                                if(centers.length()<=0){
+                                    localListCenters.add("No hay centros médicos registrados");
+                                    Snackbar.make(rootView, "No hay centros médicos registrados", Snackbar.LENGTH_SHORT).show();
+                                }else{
+                                    localListCenters.add("Elija el centro médico en el que es atendido");
+                                    for(int i=0; i<centers.length(); i++){
+                                        localListCenters.add(centers.getJSONObject(i).getString("name"));
+                                        centersMap.put(Integer.toString(i), centers.getJSONObject(i).getString("_id"));
+                                    }
+                                }
+
+                                Log.d("CENTERSMAP", centersMap.toString());
+
+                                ArrayAdapter<String> dataCentersAdapter = new ArrayAdapter<>(rootView.getContext(),R.layout.support_simple_spinner_dropdown_item, localListCenters);
+                                dataCentersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                listMedicalCenters.setAdapter(dataCentersAdapter);
+                            }else{
+                                Snackbar.make(rootView, response.getString("message"), Snackbar.LENGTH_SHORT).show();
+                            }
+
+                            req.stop();
+                        }catch(Exception error){
+                            Log.d("onError", error.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("onError", error.toString());
+                        req.stop();
+                    }
+                }
+        );
+
+        req.add(jsonRequest);
+    }
 
 
 }
