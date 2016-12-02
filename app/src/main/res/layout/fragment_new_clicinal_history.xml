@@ -1,0 +1,253 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.davidh.davidh.clinicapp.newClicinalHistory"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <EditText
+                android:id="@+id/et_IdUserNewHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:hint="Identificación del paciente"
+                android:inputType="number"
+                />
+
+            <Button
+                android:id="@+id/btnSearchPatientInConsultation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="Buscar"
+                android:backgroundTint="@color/btnApp"
+                android:textColor="#FFF"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/nhNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Nombres"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/nhLastNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Apellidos"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/nhEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:hint="Correo"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/nhAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:hint="Edad"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/nhCivilState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:hint="Estado civil"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/nhSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:hint="Sexo"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/nhOccupation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Ocupación"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/nhPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:hint="Teléfono"
+                android:inputType="phone"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/nhReasonQuery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Razón de la consulta"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/nhDrunk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bebe"
+                android:layout_weight="0.33"
+                android:buttonTint="@color/btnApp"/>
+
+            <CheckBox
+                android:id="@+id/nhSmoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fuma"
+                android:layout_weight="0.33"
+                android:buttonTint="@color/btnApp"/>
+
+            <CheckBox
+                android:id="@+id/nhDrugs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usa drogas"
+                android:layout_weight="0.33"
+                android:buttonTint="@color/btnApp"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/nhParental"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Antecedentes familiares"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <EditText
+            android:id="@+id/nhSickness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enfermedades"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <EditText
+            android:id="@+id/nhSurgieries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cirugías"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <EditText
+            android:id="@+id/nhAllergies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alergias"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <EditText
+            android:id="@+id/nhTests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exámenes sugeridos"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <EditText
+            android:id="@+id/nhRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Recomendaciones"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            />
+
+        <Spinner
+            android:id="@+id/nhMedicalCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
+        <Button
+            android:id="@+id/nhSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/btnApp"
+            android:text="Agregar consulta"
+            android:textColor="#FFF"/>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

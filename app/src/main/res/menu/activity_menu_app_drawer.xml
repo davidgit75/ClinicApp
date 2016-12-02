@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/patientHistory"
+            android:icon="@drawable/ic_assignment_24dp"
+            android:title="Mi historia" />
+        <item
+            android:id="@+id/patientTests"
+            android:icon="@drawable/ic_dns_24dp"
+            android:title="Exámenes" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/patientProfile"
+                android:icon="@drawable/ic_settings_24dp"
+                android:title="Configuración" />
+            <item
+                android:id="@+id/patientBtnLogout"
+                android:icon="@drawable/ic_power_settings_new_24dp"
+                android:title="Salir" />
+        </menu>
+    </item>
+
+</menu>

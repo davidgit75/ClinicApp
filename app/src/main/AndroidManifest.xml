@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davidh.davidh.clinicapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +16,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Register" />
+        <activity
+            android:name=".MenuApp"
+            android:label="@string/title_activity_menu_app"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HistoryDetails"
+            android:label="@string/title_activity_history_details"
+            android:parentActivityName=".MenuApp"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidh.davidh.clinicapp.MenuApp" />
         </activity>
     </application>
 
