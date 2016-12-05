@@ -9,10 +9,11 @@
         <item
             android:id="@+id/patientTests"
             android:icon="@drawable/ic_dns_24dp"
-            android:title="Exámenes" />
+            android:title="Exámenes"
+            android:visible="false"/>
     </group>
 
-    <item android:title="">
+    <item android:title="Más opciones">
         <menu>
             <item
                 android:id="@+id/patientProfile"

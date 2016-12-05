@@ -834,8 +834,6 @@
                             android:gravity="fill_horizontal"
                             android:text="Estas son las recomendaciones"
                             android:ellipsize="end"
-                            android:maxLines="5"
-                            android:scrollbars="vertical"
                             />
 
                     </LinearLayout>

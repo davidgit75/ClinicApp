@@ -182,7 +182,7 @@ public class MenuApp extends AppCompatActivity
                 showFragment(containerPatient, patientTest);
                 break;
             case R.id.patientProfile:
-                showFragment(containerPatient, patientProfile);
+                showFragment(containerPatient, medicProfile);
                 break;
             case R.id.patientBtnLogout:
                 logout();

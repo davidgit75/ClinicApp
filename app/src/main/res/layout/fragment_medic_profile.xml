@@ -2,12 +2,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.davidh.davidh.clinicapp.MedicProfile">
+    tools:context="com.davidh.davidh.clinicapp.MedicProfile"
+    android:padding="15dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Medic Profile" />
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp">
+
+               <EditText
+                   android:id="@+id/mepNames"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:hint="Nombres"
+                   android:inputType="text"/>
+
+               <EditText
+                   android:id="@+id/mepLastNames"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:hint="Apellidos"
+                   android:inputType="text"/>
+
+           </LinearLayout>
+
+
+               <EditText
+                   android:id="@+id/mepEmail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Correo"
+                   android:inputType="textEmailAddress"/>
+
+
+               <EditText
+                   android:id="@+id/mepIdentification"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Identificación"
+                   android:inputType="text"/>
+
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp">
+
+               <EditText
+                   android:id="@+id/mepCivilState"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.6"
+                   android:hint="Estado civil"
+                   android:inputType="text"/>
+
+               <EditText
+                   android:id="@+id/mepSex"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.4"
+                   android:gravity="center"
+                   android:hint="Sexo"
+                   android:inputType="text"/>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp">
+
+               <EditText
+                   android:id="@+id/mepOccupation"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:hint="Ocupación"
+                   android:inputType="text"/>
+
+               <EditText
+                   android:id="@+id/mepPhone"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:gravity="center"
+                   android:hint="Teléfono"
+                   android:inputType="phone"/>
+
+           </LinearLayout>
+
+
+           <EditText
+               android:id="@+id/mepPassword"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Contraseña"
+               android:inputType="textPassword"/>
+
+           <EditText
+               android:id="@+id/mepNewPassword"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Nueva contraseña"
+               android:inputType="textPassword"/>
+
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+
+           <Button
+               android:id="@+id/mepSend"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:backgroundTint="@color/btnApp"
+               android:text="Editar perfil"
+               android:textColor="#FFF"/>
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+
+   </ScrollView>
+
 
 </FrameLayout>

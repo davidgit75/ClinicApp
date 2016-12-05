@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initSession(String id, String username, String email, String role){
+    private void initSession(String id, String username, String email, String role, String lastnames, String civilState, String sex, String occupation, String phone){
         SharedPreferences sharedPreferences = getSharedPreferences("user_connected", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("_id", id);
@@ -91,6 +91,12 @@ public class Login extends AppCompatActivity {
         editor.putString("email", email);
         editor.putString("role", role);
         editor.putString("identification", idUser.getText().toString());
+        editor.putString("lastnames", lastnames);
+        editor.putString("civil_state", civilState);
+        editor.putString("lastnames", lastnames);
+        editor.putString("sex", sex);
+        editor.putString("occupation", occupation);
+        editor.putString("phone", phone);
         editor.commit();
         Log.d("INITSESSION", editor.toString());
     }
@@ -128,7 +134,11 @@ public class Login extends AppCompatActivity {
 
                             if(response.getString("status").equals("success")){
                                 JSONObject userToConnect = response.getJSONObject("data");
-                                initSession(userToConnect.getString("_id"), userToConnect.getString("names"), userToConnect.getString("email"), response.getString("typeUser"));
+                                initSession(
+                                        userToConnect.getString("_id"), userToConnect.getString("names"), userToConnect.getString("email"),
+                                        response.getString("typeUser"), userToConnect.getString("lastnames"), userToConnect.getString("civil_state"),
+                                        userToConnect.getString("sex"), userToConnect.getString("occupation"), userToConnect.getString("phone")
+                                );
                                 initApp(response.getString("typeUser"));
                             }else{
                                 Snackbar.make(findViewById(R.id.container_login), response.getString("message"), Snackbar.LENGTH_SHORT).show();
